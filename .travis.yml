@@ -10,3 +10,14 @@ before_install:
 
 script:
   - docker run -e CI=true quinn/docker-react npm run test
+
+deploy:
+  provider: elasticbeanstalk    # travis-ci comes with pre-configured providers like this one
+  # All 5 options below are found in AWS console
+  region: "us-east-1"
+  name: "docker-react"
+  env: "Dockerreact-env"
+  bucket-name: "elasticbeanstalk-us-east-1-152598072515"
+  bucket-path: "docker-react"
+  on:
+    branch: master  # this instructs the pipeline to deploy anytime master gets changes
