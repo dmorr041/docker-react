@@ -1,19 +1,8 @@
 version: '3'
 services:
-  web:    # main container for running react app
+  web:
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     ports:
-      - "3000:3000"
-    volumes:
-      - /app/node_modules   # this basically says don't try to map something to /app/node_modules in the container - necessary because the line below maps everything in ./ to /app, but we don't want that for node modules
-      - .:/app              # this basically says map ./ in the local to /app in the container
-  tests:  # container only for running tests on F/E code
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    volumes:
-      - /app/node_modules
-      - .:/app
-    command: ["npm", "run", "test"]
+      - '80:80'
